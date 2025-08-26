@@ -54,7 +54,28 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Your answer... 
+Type 1: Overwritting changes: there will be just 1 address per customer and once we need to update the address for the customer it will overwrite and keep the most recent address
+    Table name: customer_address
+        customerid as PK
+        ,streetaddress
+        ,city
+        ,province
+        ,postal_code
+        ,country
+    
+
+Type 2: Retaining changes: this will keep a record of all the addresses for all customers, whenever a new address is entered we will set to "true" on "most_current" and we can adjust the previous address to false, this way we will keep all records and we can identify the most current based on the last column.
+    Table name: customer_address
+        addessid as PK
+        ,customer_id
+        ,streetaddress
+        ,city
+        ,province
+        ,postal_code
+        ,country
+        ,effective_date
+        ,most_current
 ```
 
 ***
